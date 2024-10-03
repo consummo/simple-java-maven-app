@@ -1,35 +1,38 @@
 pipeline {
     agent any
-    stages {
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
-        stage('Deliver') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
-            }
-        }
-        stage('Complete') {
-            steps {
-                echo "jeah buddy, the pipeline is complete {>>"
-            }
-        }
-        stage('More than complete') {
-            steps {
-                echo "This branch offers an extra stage!"
-            }
+
+    parameters{
+        booleanParam(
+            choices: ["FantasticFarmer", "DungeonDigger", "GravelGobler"], 
+            description: "Application", 
+            name: "appName"
+        )
+        string(
+            defaultValue: "1.0.0", 
+            description: "Application version", 
+            name: "appVersion"
+        )
+        booleanParam(
+            defaultValue: false, 
+            escription: "Release?", 
+            name: "doRelease"
+        )
+        choice(
+            choices: ["docker-image-a","docker-image-b", "docker-image-c"], 
+            description: "Instance type", 
+            name: "instanceType"
+        )
+    }
+
+    environment{
+        def dockerBaseUri = "https://acme.corp/dockerhub/"
+        def appExtension = "rpm" 
+
+    }
+
+    stages{
+        stage("Print environment") {
+            echo "Docker url: ${dockerBaseUri}${params.appName}_${appVersion}_${platform}.${appExtension}"
         }
     }
 }
