@@ -32,7 +32,9 @@ pipeline {
 
     stages{
         stage("Print environment") {
-            echo "Docker url: ${dockerBaseUri}${params.appName}_${appVersion}_${platform}.${appExtension}"
+            steps {
+                echo "Docker url: ${dockerBaseUri}${params.appName}_${appVersion}_${platform}.${appExtension}"
+            }
         }
     }
 }
