@@ -27,7 +27,7 @@ pipeline {
     environment{
         def dockerBaseUri = "https://acme.corp/dockerhub/"
         def appExtension = "rpm" 
-
+        def platform = "x86"
     }
 
     stages{
