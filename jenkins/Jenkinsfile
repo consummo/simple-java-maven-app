@@ -18,7 +18,7 @@ pipeline {
             name: "doRelease"
         )
         choice(
-            choices: ["docker-image-a","docker-image-b", "docker-image-c"], 
+            choices: ["debian8","rhel8", "ubuntu24"], 
             description: "Base image", 
             name: "dockerBaseImage"
         )
