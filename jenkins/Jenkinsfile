@@ -19,21 +19,20 @@ pipeline {
         )
         choice(
             choices: ["docker-image-a","docker-image-b", "docker-image-c"], 
-            description: "Instance type", 
-            name: "instanceType"
+            description: "Base image", 
+            name: "dockerBaseImage"
         )
     }
 
     environment{
         def dockerBaseUri = "https://acme.corp/dockerhub/"
-        def appExtension = "rpm" 
         def platform = "x86"
     }
 
     stages{
         stage("Print environment") {
             steps {
-                echo "Docker url: ${dockerBaseUri}${params.appName}_${appVersion}_${platform}.${appExtension}"
+                echo "image name: ${dockerBaseUri}${params.appName}_${appVersion}_${params.dockerBaseImage}_${platform}:${env.BUILD_NUMBER}"
             }
         }
     }
