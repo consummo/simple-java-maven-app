@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters{
-        booleanParam(
+        choice(
             choices: ["FantasticFarmer", "DungeonDigger", "GravelGobler"], 
             description: "Application", 
             name: "appName"
@@ -14,7 +14,7 @@ pipeline {
         )
         booleanParam(
             defaultValue: false, 
-            escription: "Release?", 
+            description: "Release?", 
             name: "doRelease"
         )
         choice(
