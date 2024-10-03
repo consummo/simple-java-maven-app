@@ -26,5 +26,10 @@ pipeline {
                 echo "jeah buddy, the pipeline is complete {>>"
             }
         }
+        stage('More than complete') {
+            steps {
+                echo "This branch offers an extra stage!"
+            }
+        }
     }
 }
