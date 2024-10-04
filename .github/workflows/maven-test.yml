@@ -3,7 +3,7 @@
 
 name: Maven Test
 on:
-  create:
+  create
 
 jobs:
   build:
